@@ -8,8 +8,8 @@ app = func.FunctionApp()
 
 
 @app.event_hub_message_trigger(arg_name="azeventhub",
-                               event_hub_name="myeventhub",
-                               connection="EventHubConnectionString")
+                               event_hub_name="elx",
+                               connection="EH_CONNECTION")
 def eventhub_trigger(azeventhub: func.EventHubEvent) -> None:
     """
     Event hub trigger function that logs the events it receives.
