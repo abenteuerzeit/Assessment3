@@ -32,3 +32,11 @@ def eventhub_trigger(azeventhub: func.EventHubEvent) -> None:
         logging.error('Unexpected Error: %s',
                       err)
         raise
+
+
+if __name__ == "__main__":
+    DATA = None
+    # read scm-latest-elxmhy6vn5v4xa6i.zip
+    with open('./scm-latest-elxmhy6vn5v4xa6i.zip', 'rb') as f:
+        DATA = f.read()
+    print(DATA)
