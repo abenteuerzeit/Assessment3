@@ -11,11 +11,24 @@ app = func.FunctionApp()
                                event_hub_name="myeventhub",
                                connection="EventHubConnectionString")
 def eventhub_trigger(azeventhub: func.EventHubEvent) -> None:
-    """_summary_
+    """
     Event hub trigger function that logs the events it receives.
 
     Args:
-        azeventhub (func.EventHubEvent): _description_
+        azeventhub (func.EventHubEvent): Event Hub Event
+
+    Raises:
+        Exception: Raises any exception that occurs within the try block
     """
-    event = azeventhub.get_body().decode('utf-8')
-    logging.info('Python EventHub trigger processed an event: %s', event)
+    try:
+        event = azeventhub.get_body().decode('utf-8')
+        logging.info('Python EventHub trigger processed an event: %s',
+                     event)
+    except UnicodeDecodeError as err:
+        logging.error('Decode Error: Could not decode event data. Error: %s',
+                      err)
+        raise
+    except Exception as err:
+        logging.error('Unexpected Error: %s',
+                      err)
+        raise
